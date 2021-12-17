@@ -8,10 +8,21 @@ _________________*/
        FONTS
 _________________*/
 
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
+
 /*_________________
 
-       LIBS
+       COMMONS
 _________________*/
+
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.container{
+       margin: 0 auto;
+       width: 1200px;
+}
 
 /*_________________
 
