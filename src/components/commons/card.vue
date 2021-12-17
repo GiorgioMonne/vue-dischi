@@ -26,7 +26,7 @@ export default {
     created(){
         axios.get('https://flynn.boolean.careers/exercises/api/array/music')
         .then((response) => {
-            this.cards = response.data;
+            this.cards = response.data.response;
         })
         .catch(function (error){
             console.log(error);
