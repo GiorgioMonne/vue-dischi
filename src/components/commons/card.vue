@@ -45,6 +45,12 @@ export default {
 
     h2{
         text-align: center;
+        text-transform: uppercase;
+        color: white;
+    }
+
+    h4{
+        color: grey;
     }
 
     .container-card{
