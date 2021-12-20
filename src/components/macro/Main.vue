@@ -19,6 +19,7 @@ export default {
 
     main{
         background-color: rgb(33, 39, 90);
+        
     }
 
     .container{

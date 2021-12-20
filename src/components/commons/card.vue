@@ -1,17 +1,17 @@
 <template>
     <main>
         <div class="search-bar">
-                <SearchBar @searching="CercaRobe"/>
+                <SearchBar @searching="CercaGenere"/>
         </div>
         <div class="search-bar">
-                <SearchBar/>
+                <SearchBar @searching="CercaBand"/>
         </div>
         <div class="search-bar">
-                <SearchBar/>
+                <SearchBar @searching="CercaAnno"/>
         </div>
 
         <div class="container-card">         
-            <div class="card" v-for="(card, index) in cards" :key="index">
+            <div class="card" v-for="(card, index) in cardsCerc" :key="index">
                 <img :src="card.poster" alt="">
                 <div class="testo">
                     <h2>{{card.title}}</h2>
@@ -38,7 +38,8 @@ export default {
     },
     data(){
         return{
-            cards: null
+            cards: null,
+            cardsCerc: null
             // loader: false
         }
     },
@@ -46,6 +47,7 @@ export default {
         axios.get('https://flynn.boolean.careers/exercises/api/array/music')
         .then((response) => {
             this.cards = response.data.response;
+            this.cardsCerc = response.data.response;
             // this.loader = true;
         })
         .catch(function (error){
@@ -53,8 +55,20 @@ export default {
         });        
     },
     methods:{
-        CercaRobe(payload){
-            console.log(payload);
+        CercaGenere(payload){
+            this.cardsCerc = this.cards.filter((elm) =>{
+                return elm.genre.toLowerCase().includes(payload.toLowerCase());
+            });
+        },
+        CercaBand(payload){
+            this.cardsCerc = this.cards.filter((elm) =>{
+                return elm.author.toLowerCase().includes(payload.toLowerCase());
+            });
+        },
+        CercaAnno(payload){
+            this.cardsCerc = this.cards.filter((elm) =>{
+                return elm.year.toLowerCase().includes(payload.toLowerCase());
+            });
         }
     }
 
