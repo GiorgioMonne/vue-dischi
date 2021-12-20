@@ -1,13 +1,27 @@
 <template>
     <main>
-        <div class="container-card">
+        <div class="search-bar">
+                <SearchBar @searching="CercaRobe"/>
+        </div>
+        <div class="search-bar">
+                <SearchBar/>
+        </div>
+        <div class="search-bar">
+                <SearchBar/>
+        </div>
+
+        <div class="container-card">         
             <div class="card" v-for="(card, index) in cards" :key="index">
                 <img :src="card.poster" alt="">
                 <div class="testo">
                     <h2>{{card.title}}</h2>
                     <h4>{{card.author}}</h4>
+                    <h4>{{card.year}}</h4>
                 </div>
             </div>
+            <!-- <div class="loader"  v-if=" loader == false ">
+                LOADING...
+            </div> -->
         </div>
     </main>
 </template>
@@ -15,23 +29,35 @@
 <script>
 
 import axios from 'axios';
+import SearchBar from '../commons/SearchBar.vue';
 
 export default {
     name: 'card',
+    components: {
+        SearchBar
+    },
     data(){
         return{
             cards: null
+            // loader: false
         }
     },
     created(){
         axios.get('https://flynn.boolean.careers/exercises/api/array/music')
         .then((response) => {
             this.cards = response.data.response;
+            // this.loader = true;
         })
         .catch(function (error){
             console.log(error);
         });        
+    },
+    methods:{
+        CercaRobe(payload){
+            console.log(payload);
+        }
     }
+
 }
 </script>
 
@@ -39,7 +65,7 @@ export default {
 
     main{
         background-color: rgb(33, 39, 90);
-        padding: 103px 0;
+        padding: 55px 0;
         
     }
 
@@ -51,6 +77,12 @@ export default {
 
     h4{
         color: grey;
+    }
+
+    .search-bar{
+        display: flex;
+        justify-content: center;
+        margin-bottom:20px;
     }
 
     .container-card{
